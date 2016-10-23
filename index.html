@@ -173,6 +173,7 @@
           self.popupWin.fadeOut();
         });
         //绑定上下切换按钮事件
+        this.flag = true;
         this.nextBtn.hover(function () {
           if (!$(this).hasClass("disabled") && self.groupData.length > 1) {
             $(this).addClass("lightbox-next-btn-show");
@@ -183,7 +184,8 @@
           }
         }).click(function (e) {
           e.stopPropagation();
-          if (!$(this).hasClass("disabled")) {
+          if (!$(this).hasClass("disabled") && self.flag) {
+            self.flag = false;
             self.goto("next");
           }
         });
@@ -197,7 +199,8 @@
           }
         }).click(function (e) {
           e.stopPropagation();
-          if (!$(this).hasClass("disabled")) {
+          if (!$(this).hasClass("disabled") && self.flag) {
+            self.flag = false;
             self.goto("prev");
           }
         });
@@ -264,6 +267,7 @@
               height: height - 10
             }).fadeIn();
             self.picCaptionArea.fadeIn();
+            self.flag = true;
           });
           //设置描述文字和当前索引
           this.captionText.text(this.groupData[this.index].caption);
